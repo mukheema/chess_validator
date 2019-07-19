@@ -1,0 +1,3 @@
+#jsonrpc2==0.4.1
+#WebTest==2.0.33
+jsonrpclib==0.1.7
