@@ -22,11 +22,12 @@ class ChessLogger:
         if not os.path.exists(resultFolder):
             os.makedirs(resultFolder)
         self._ReportFile = "{0}/test_report.log".format(resultFolder)
-        fileHandle = logging.FileHandler(filename=self._ReportFile)
+        #fileHandle = logging.FileHandler(filename=self._ReportFile)
         stdoutHandle = logging.StreamHandler(sys.stdout)
         stderrHandle = logging.StreamHandler(sys.stderr)
-        handlers = [ fileHandle, stdoutHandle, stderrHandle]
-        logging.basicConfig(level=logging.DEBUG,
+        #handlers = [ fileHandle, stdoutHandle, stderrHandle]
+        handlers = [ stdoutHandle, stderrHandle]
+        logging.basicConfig(filename=self._ReportFile, filemode='w',
                         format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
                         handlers=handlers
                         )
@@ -35,13 +36,17 @@ class ChessLogger:
         self._logger.addHandler(handlers)
 
     def Info(self, msg):
-        self._logger.Info(msg)
+        logging.info(msg)
+        #self._logger.info(msg)
 
     def Warn(self, msg):
-        self._logger.Warn(msg)
+        logging.warn(msg)
+        #self._logger.warn(msg)
 
     def Error(self, msg):
-        self._logger.error(msg)
+        logging.error(msg)
+        #self._logger.error(msg)
 
     def Debug(self, msg):
-        self._logger.debug(msg)
+        logging.debug(msg)
+        #self._logger.debug(msg)

@@ -19,9 +19,9 @@ class ChessClient:
         }
         headers = {'content-type': 'application/json'}
 
-        print("mukheem: %s" %payload)
+        print("User Request: %s" % payload)
         userResponse = requests.post(str(self._url), data=json.dumps(payload), headers=headers).json()
-        print("ChessBoard Response : %s" % userResponse.values())
+        print("ChessBoard Response: %s" % userResponse.values())
         return userResponse.values()
 
     def XX_Method(self, userParams):
