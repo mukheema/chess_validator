@@ -6,12 +6,9 @@ import json
 import unittest
 
 
-ProjectPath = os.path.realpath(__file__) + "../"
+sys.path.append("/".join(os.path.realpath(__file__).split('/')[:-2]))
 
-print(ProjectPath)
-
-sys.path.append("/Users/mukheema/aDisk/my_proj/chess_validator")
-from testlib.chess_client import *
+from testlib.chess_client import ChessClient
 from testlib.logger import ChessLogger
 
 class Positivetest_s(unittest.TestCase):
