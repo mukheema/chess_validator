@@ -1,5 +1,6 @@
 #!/usr/bin/env python3 -tu
 
+import sys
 import os
 import logging
 from logging.config import dictConfig
@@ -13,15 +14,18 @@ class ChessLogger:
                             handlers = {'h': {'class': 'logging.StreamHandler', 'formatter': 'f', 'level': logging.DEBUG} },
                             root = { 'handlers': ['h'], 'level': logging.DEBUG, },)
         dictConfig(logging_config)
-        now = datetime.now()
-        resultFolder = now.strftime("%d/%m/%Y %H:%M:%S")
-        resultFolder = "report"
-        os.makedirs(resultFolder)
+        today = datetime.now()
+        h = '12'
+        if today.hour < 12:
+            h = '00'
+        resultFolder = today.strftime('%Y%m%d')+ h
+        if not os.path.exists(resultFolder):
+            os.makedirs(resultFolder)
         self._ReportFile = "{0}/test_report.log".format(resultFolder)
         fileHandle = logging.FileHandler(filename=self._ReportFile)
         stdoutHandle = logging.StreamHandler(sys.stdout)
         stderrHandle = logging.StreamHandler(sys.stderr)
-        handlers = [ fileHandle. stdoutHandle. stderrHandle]
+        handlers = [ fileHandle, stdoutHandle, stderrHandle]
         logging.basicConfig(level=logging.DEBUG,
                         format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s - %(message)s',
                         handlers=handlers
