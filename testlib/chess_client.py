@@ -8,7 +8,9 @@ class ChessClient:
     def __init__(self, url):
             self._url = url
 
-    def MakeMove(self, userParams):
+    def MakeMove(self, userParams=None):
+        if not userParams:
+            userParams = {}
         payload = {
             "method": "MakeMove",
             "params": userParams,
@@ -17,9 +19,8 @@ class ChessClient:
         }
         headers = {'content-type': 'application/json'}
 
-        #userResponse = requests.post(str(self._url), data=payload, headers=headers).json()
-        userResponse = requests.post('http://chesstest.solidfire.net:8080/json-rpc', data=payload, headers={'content-type': 'application/json'}).json()
-        print("ChessBoard Response : %s" % userResponse.values())
+        print("mukheem: %s" %payload)
+        userResponse = requests.post(str(self._url), data=json.dumps(payload), headers=headers).json()
         print("ChessBoard Response : %s" % userResponse.values())
         return userResponse.values()
 
